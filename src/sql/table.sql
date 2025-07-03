@@ -120,3 +120,6 @@ CREATE TABLE categorie_livre(
    FOREIGN KEY(id_livre) REFERENCES livre(id_livre),
    FOREIGN KEY(id_categorie) REFERENCES categorie(id_categorie)
 );
+
+
+

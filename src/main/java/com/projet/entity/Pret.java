@@ -32,6 +32,9 @@ public class Pret {
     @JoinColumn(name = "id_exemplaire", nullable = false)
     private Exemplaire exemplaire;
 
+    @Column(name = "rendu")
+    private boolean rendu;
+
     public Pret() {}
 
     // Getters et setters...
@@ -81,6 +84,14 @@ public class Pret {
 
     public void setExemplaire(Exemplaire exemplaire) {
         this.exemplaire = exemplaire;
+    }
+
+    public boolean isRendu() {
+        return rendu;
+    }
+
+    public void setRendu(boolean rendu) {
+        this.rendu = rendu;
     }
 
 }

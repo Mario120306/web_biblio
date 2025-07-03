@@ -23,9 +23,9 @@ INSERT INTO profil (id_profil, type_adherant, quota_pret, quota_reservation) VAL
 -- Insertion dans la table status
 INSERT INTO status (id_status, nom_status) VALUES
 (1, 'En attente'),
-(2, 'Confirmée'),
-(3, 'Annulée'),
-(4, 'Terminée');
+(2, 'Confirme'),
+(3, 'Annulee'),
+(4, 'Termine');
 
 -- Insertion dans la table type_pret (avec données supplémentaires)
 INSERT INTO type_pret (id_type, type) VALUES
@@ -47,11 +47,11 @@ INSERT INTO livre (id_livre, titre, isbn, langue, annee_publication, synopsis, n
 
 -- Insertion dans la table exemplaire
 INSERT INTO exemplaire (id_exemplaire, disponible, id_livre) VALUES
-(1, 1, 1),
-(2, 0, 1),
-(3, 1, 2),
-(4, 1, 3),
-(5, 0, 4);
+(1, 10, 1),
+(2, 20, 1),
+(3, 21, 2),
+(4, 21, 3),
+(5, 60, 4);
 
 -- Insertion dans la table adherant
 INSERT INTO adherant (id_adherent, nom, prenom, password, id_profil) VALUES

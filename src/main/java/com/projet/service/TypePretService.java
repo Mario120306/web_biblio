@@ -13,7 +13,7 @@ public class TypePretService {
     @Autowired
     private TypePretRepository typePretRepository;
 
-    public List<TypePret> findAll() {
+    public List<TypePret> getAllTypePrets() {
         return typePretRepository.findAll();
     }
 
@@ -23,5 +23,9 @@ public class TypePretService {
 
     public void deleteById(int id) {
         typePretRepository.deleteById(id);
+    }
+
+    public java.util.Optional<TypePret> findById(int id) {
+        return typePretRepository.findById(id);
     }
 }

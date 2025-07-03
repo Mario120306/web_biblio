@@ -29,4 +29,8 @@ public class ExemplaireService {
     public void deleteById(int id) {
         exemplaireRepository.deleteById(id);
     }
+
+    public List<Exemplaire> getAllExemplairesAvecLivre() {
+        return exemplaireRepository.findAllWithLivre();
+    }
 }
