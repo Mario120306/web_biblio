@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS bibliotheque;
-USE bibliotheque;
 
 -- Insertion dans la table categorie
 INSERT INTO categorie (id_categorie, nom_categorie) VALUES
@@ -20,7 +18,7 @@ INSERT INTO profil (id_profil, type_adherant, quota_pret, quota_reservation) VAL
 (1, 'Etudiant', 3, 2),
 (2, 'Professeur', 5, 3),
 (3, 'Anonyme', 1, 1),
-(4, 'Profetionel', 10, 5);
+(4, 'Professionnel', 10, 5);
 
 -- Insertion dans la table status
 INSERT INTO status (id_status, nom_status) VALUES
@@ -29,22 +27,23 @@ INSERT INTO status (id_status, nom_status) VALUES
 (3, 'Annulée'),
 (4, 'Terminée');
 
--- Insertion dans la table type_pret
+-- Insertion dans la table type_pret (avec données supplémentaires)
 INSERT INTO type_pret (id_type, type) VALUES
-(1, 'Court terme'),
-(2, 'Long terme');
+(1, 'Sur place'),
+(2, 'Long terme'),
+(3, 'Court terme'), -- Nouvelle entrée
+(4, 'Réservé');     -- Nouvelle entrée
 
 -- Insertion dans la table admin
 INSERT INTO admin (id, nom, mdp) VALUES
 (1, 'admin1', '123');
 
-
 -- Insertion dans la table livre
 INSERT INTO livre (id_livre, titre, isbn, langue, annee_publication, synopsis, nb_page, id_auteur) VALUES
-(1, 'Les Misérables', '978-0140444308', 'Français', 1862, 'Une épopée sur la justice', 1232, 1),
-(2, 'Fondation', '978-0553293357', 'Anglais', 1951, 'Une saga de science-fiction', 320, 2),
-(3, 'Harry Potter à l école des sorciers', '978-2070643028', 'Français', 1997, 'Aventure d un jeune sorcier', 300, 3),
-(4, 'Devenir', '978-1524763138', 'Français', 2018, 'Mémoires de Michelle Obama', 448, 4);
+(1, 'Les Miserables', '978-0140444308', 'Français', 1862, 'Epopee sur la justice', 1232, 1),
+(2, 'Fondation', '978-0553293357', 'Anglais', 1951, 'Saga de science-fiction', 320, 2),
+(3, 'Harry Potter a l ecole des sorciers', '978-2070643028', 'Français', 1997, 'Aventure d un jeune sorcier', 300, 3),
+(4, 'Devenir', '978-1524763138', 'Français', 2018, 'Memoires de Michelle Obama', 448, 4);
 
 -- Insertion dans la table exemplaire
 INSERT INTO exemplaire (id_exemplaire, disponible, id_livre) VALUES

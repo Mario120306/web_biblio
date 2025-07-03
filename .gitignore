@@ -1,5 +1,3 @@
-deploy.bat 
-
 target/
 target/cafe-spring-1.0/
 target/cafe-spring-1.0.war
