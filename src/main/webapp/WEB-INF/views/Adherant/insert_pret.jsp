@@ -8,16 +8,6 @@
 <body>
     <h2>Demander un pret de livre</h2>
     <form action="insert_pret" method="post">
-        <label for="id_adherent">Adherent :</label>
-        <select id="id_adherent" name="id_adherent" required>
-            <c:forEach var="adherant" items="${adherants}">
-                <option value="${adherant.idAdherent}">
-                    ${adherant.nom} ${adherant.prenom}
-                </option>
-            </c:forEach>
-        </select>
-        <br><br>
-
         <label for="id_exemplaire">Livre (exemplaire) :</label>
         <select id="id_exemplaire" name="id_exemplaire" required>
             <c:forEach var="exemplaire" items="${exemplaires}">

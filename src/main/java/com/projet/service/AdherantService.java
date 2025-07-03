@@ -25,4 +25,8 @@ public class AdherantService {
     public java.util.Optional<Adherant> findById(int id) {
         return adherantRepository.findById(id);
     }
+
+    public Adherant findByNom(String nom) {
+        return adherantRepository.findByNom(nom);
+    }
 }

@@ -60,8 +60,8 @@ INSERT INTO adherant (id_adherent, nom, prenom, password, id_profil) VALUES
 (3, 'Durand', 'Pierre', 'pierre789', 3);
 
 -- Insertion dans la table pret
-INSERT INTO pret (id_pret, date_debut, date_fin, id_type, id_adherent, id_exemplaire) VALUES
-(1, '2025-06-01', '2025-06-15', 1, 1, 2),
+INSERT INTO pret (id_pret, date_debut, date_fin, id_type, id_adherent, id_exemplaire,rendu) VALUES
+(1, '2025-06-01', '2025-06-15', 1, 1, 2,'true');
 (2, '2025-06-05', '2025-07-05', 2, 2, 5),
 (3, '2025-06-10', '2025-06-24', 1, 3, 4);
 

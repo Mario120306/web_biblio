@@ -17,6 +17,8 @@ import com.projet.entity.TypePret;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AdherantController {
 
@@ -36,8 +38,13 @@ public class AdherantController {
     @PostMapping("/adherent_login")
     public String login(@RequestParam("nom") String nom,
                         @RequestParam("password") String password,
-                        Model model) {
+                        Model model,
+                        HttpSession session) {
         if (adherantService.verifierAdherant(nom, password)) {
+            // Récupérer l'adhérant connecté
+            Adherant adherant = adherantService.findByNom(nom);
+            // Stocker l'id dans la session
+            session.setAttribute("adherantId", adherant.getIdAdherent());
             // Connexion réussie
             return "Adherant/home_adherant"; // Redirige vers la page d'accueil des adhérents
         } else {
@@ -61,14 +68,19 @@ public class AdherantController {
         return "Adherant/insert_pret";
     }
     @PostMapping("/insert_pret")
-    public String insertPret(@RequestParam("id_adherent") int idAdherent,
-                             @RequestParam("id_exemplaire") int idExemplaire,
+    public String insertPret(@RequestParam("id_exemplaire") int idExemplaire,
                              @RequestParam("id_type") int idType,
                              @RequestParam("date_debut") String dateDebutStr,
                              @RequestParam("date_fin") String dateFinStr,
-                             Model model) {
+                             Model model,
+                             HttpSession session) {
         try {
-            Adherant adherant = adherantService.findById(idAdherent).orElse(null);
+            Integer adherantId = (Integer) session.getAttribute("adherantId");
+            if (adherantId == null) {
+                model.addAttribute("erreur", "Vous devez être connecté pour effectuer un prêt.");
+                return "Adherant/form_adherant";
+            }
+            Adherant adherant = adherantService.findById(adherantId).orElse(null);
             Exemplaire exemplaire = exemplaireService.findById(idExemplaire).orElse(null);
             TypePret typePret = typePretService.findById(idType).orElse(null);
 
@@ -82,14 +94,16 @@ public class AdherantController {
             pret.setTypePret(typePret);
             pret.setDateDebut(dateDebut);
             pret.setDateFin(dateFin);
-            pret.setRendu(false);
+            pret.setRendu(0); // Par défaut non rendu
 
-            pretService.save(pret);
+            boolean success = pretService.insererPretSiQuota(adherant, pret);
 
-            // Message de succès
-            model.addAttribute("message", "Le prêt a été inséré avec succès !");
+            if (success) {
+                model.addAttribute("message", "Le prêt a été inséré avec succès !");
+            } else {
+                model.addAttribute("erreur", "Impossible d'insérer le prêt : quota atteint, pénalité ou exemplaire indisponible.");
+            }
         } catch (Exception e) {
-            // Message d'erreur
             model.addAttribute("erreur", "Erreur lors de l'insertion du prêt.");
         }
 
@@ -99,5 +113,30 @@ public class AdherantController {
         model.addAttribute("types", typePretService.getAllTypePrets());
 
         return "Adherant/insert_pret";
+    }
+
+    @GetMapping("/liste_pret")
+    public String voirPretsAdherant(HttpSession session, Model model) {
+        Integer adherantId = (Integer) session.getAttribute("adherantId");
+        if (adherantId == null) {
+            model.addAttribute("erreur", "Vous devez être connecté pour voir vos prêts.");
+            return "Adherant/form_adherant";
+        }
+        List<Pret> prets = pretService.findByAdherantId(adherantId);
+        model.addAttribute("prets", prets);
+        return "Adherant/pret_list";
+    }
+    @GetMapping("/render_reservation")
+    public String render_reservation(Model model) {
+        // Récupérer la liste des exemplaires avec leur livre associé
+        List<Exemplaire> exemplaires = exemplaireService.getAllExemplairesAvecLivre();
+        // Récupérer la liste des adhérents
+        List<Adherant> adherants = adherantService.findAll();
+        List<TypePret> typePrets = typePretService.getAllTypePrets();
+        model.addAttribute("exemplaires", exemplaires);
+        model.addAttribute("adherants", adherants);
+        model.addAttribute("types", typePrets);
+
+        return "Adherant/Reservation";
     }
 }

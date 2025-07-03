@@ -33,7 +33,7 @@ public class Pret {
     private Exemplaire exemplaire;
 
     @Column(name = "rendu")
-    private boolean rendu;
+    private int rendu;
 
     public Pret() {}
 
@@ -86,12 +86,11 @@ public class Pret {
         this.exemplaire = exemplaire;
     }
 
-    public boolean isRendu() {
+    public int isRendu() {
         return rendu;
     }
 
-    public void setRendu(boolean rendu) {
+    public void setRendu(int rendu) {
         this.rendu = rendu;
     }
-
 }

@@ -37,7 +37,7 @@ public class PretService {
 
         // Nombre de prêts actifs à la date de début du nouveau prêt (non rendus)
         long nbPretsActifs = pretRepository.findByAdherant(adherant).stream()
-            .filter(p -> p.getDateFin() == null || !p.getDateFin().before(pret.getDateDebut()))
+            .filter(p -> p.isRendu() == 0 && (p.getDateFin() == null || !p.getDateFin().before(pret.getDateDebut())))
             .count();
 
         // Nombre de prêts déjà faits le même jour
@@ -59,5 +59,13 @@ public class PretService {
             return true;
         }
         return false;
+    }
+
+    public List<Pret> findByAdherantId(int adherantId) {
+        return pretRepository.findByAdherant_IdAdherent(adherantId);
+    }
+
+    public List<Pret> findByAdherant(Adherant adherant) {
+        return pretRepository.findByAdherant(adherant);
     }
 }
