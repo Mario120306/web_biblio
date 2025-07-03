@@ -31,6 +31,8 @@
                         <% 
                             if ("1".equals(String.valueOf(pageContext.getAttribute("pret.rendu")))) {
                                 out.print("Le livre est rendu");
+                            } else if ("0".equals(String.valueOf(pageContext.getAttribute("pret.rendu")))) {
+                                out.print("En cours de lecture <a href=\"/prolonger?pretId=" + pageContext.getAttribute("pret.id") + "\">Prolonger</a>");
                             } else {
                                 out.print("En cours de lecture");
                             }
