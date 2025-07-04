@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Date;
 
 @Service
 public class PretService {
@@ -69,7 +70,7 @@ public class PretService {
     public List<Pret> findByAdherant(Adherant adherant) {
         return pretRepository.findByAdherant(adherant);
     }
-public Pret updatePret(int idPret, Pret updatedPret) {
+public Pret updatePret(int idPret,Date date_rendre , Pret updatedPret) {
         // Récupérer le prêt existant par son ID
         Optional<Pret> optionalPret = pretRepository.findById(idPret);
         if (!optionalPret.isPresent()) {
@@ -87,6 +88,7 @@ public Pret updatePret(int idPret, Pret updatedPret) {
         }
         // Toujours définir rendu à 1
         existingPret.setRendu(1);
+        existingPret.setDate_rendu(date_rendre);
         if (updatedPret.getTypePret() != null) {
             existingPret.setTypePret(updatedPret.getTypePret());
         }

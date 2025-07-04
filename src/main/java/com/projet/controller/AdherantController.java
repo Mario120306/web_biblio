@@ -105,6 +105,7 @@ public class AdherantController {
             pret.setDateDebut(dateDebut);
             pret.setDateFin(dateFin);
             pret.setRendu(0); // Par défaut non rendu
+            pret.setDate_rendu(null); // Pas de date de rendu au moment de l'insertion
 
             boolean success = pretService.insererPretSiQuota(adherant, pret);
 

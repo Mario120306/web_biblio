@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.projet.service.PretService;
 import java.util.List;
-
+import java.util.Date;
 @Controller
 public class AdminController {
 
@@ -34,12 +34,12 @@ public class AdminController {
     }
 
     @GetMapping("/rendre_livre")
-    public String rendrePret(@RequestParam("pretId") int pretId, Model model) {
+    public String rendrePret(@RequestParam("pretId") int pretId,@RequestParam("date_rendu") Date date_rendu, Model model) {
         try {
             // Créer un objet Pret vide pour la mise à jour (seul rendu sera modifié à 1)
             Pret updatedPret = new Pret();
             // Appeler la méthode updatePret pour mettre à jour le prêt
-            pretService.updatePret(pretId, updatedPret);
+            pretService.updatePret(pretId,date_rendu,updatedPret);
             // Ajouter un message de confirmation
             model.addAttribute("message", "Le prêt a été marqué comme rendu avec succès.");
              List<Pret> listePrets = pretService.findAll();

@@ -35,6 +35,30 @@ public class Pret {
     @Column(name = "rendu")
     private int rendu;
 
+    @Column(name = "date_rendu")
+    private Date date_rendu;
+
+    
+    public Pret(int idPret, Date dateDebut, Date dateFin, TypePret typePret, Adherant adherant, Exemplaire exemplaire,
+            int rendu, Date date_rendu) {
+        this.idPret = idPret;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.typePret = typePret;
+        this.adherant = adherant;
+        this.exemplaire = exemplaire;
+        this.rendu = rendu;
+        this.date_rendu = date_rendu;
+    }
+
+    public Date getDate_rendu() {
+        return date_rendu;
+    }
+
+    public void setDate_rendu(Date date_rendu) {
+        this.date_rendu = date_rendu;
+    }
+
     public Pret() {}
 
     // Getters et setters...

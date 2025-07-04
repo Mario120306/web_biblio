@@ -220,14 +220,24 @@
                         <td>${pret.exemplaire.livre.titre} (ID: ${pret.exemplaire.idExemplaire})</td>
                         <td>
                             <c:choose>
-                                <c:when test="${pret.getRendu() == 1}">
-                                    <button class="rendu-button" disabled>Le livre est rendu</button>
+                                <c:when test="${pret.rendu == 1}">
+                                    <button class="btn btn-success" disabled>
+                                        <i class="fas fa-check-circle"></i> Livre rendu
+                                    </button>
                                 </c:when>
-                                <c:when test="${pret.getRendu() == 0}">
-                                    <a href="rendre_livre?pretId=${pret.getIdPret()}" class="rendu-button">Rendre</a>
+                                <c:when test="${pret.rendu == 0}">
+                                    <form action="rendre_livre" method="get" style="display: inline;">
+                                        <input type="hidden" name="pretId" value="${pret.idPret}">
+                                        <input type="date" name="date_rendu">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-book"></i> Rendre le livre
+                                        </button>
+                                    </form>
                                 </c:when>
                                 <c:otherwise>
-                                    <span>En cours de lecture</span>
+                                    <span class="badge bg-warning text-dark">
+                                        <i class="fas fa-hourglass-half"></i> En cours de lecture
+                                    </span>
                                 </c:otherwise>
                             </c:choose>
                         </td>
