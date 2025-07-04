@@ -73,6 +73,7 @@ CREATE TABLE pret(
    id_pret INT,
    date_debut DATE,
    date_fin DATE,
+   rendu LOGICAL,
    id_type INT NOT NULL,
    id_adherent INT NOT NULL,
    id_exemplaire INT NOT NULL,
@@ -87,9 +88,11 @@ CREATE TABLE reservation(
    date_reservation DATE,
    date_debut_pret DATE,
    date_fin_pret DATE,
+   id_exemplaire INT NOT NULL,
    id_status INT NOT NULL,
    id_adherent INT NOT NULL,
    PRIMARY KEY(id_reservation),
+   FOREIGN KEY(id_exemplaire) REFERENCES exemplaire(id_exemplaire),
    FOREIGN KEY(id_status) REFERENCES status(id_status),
    FOREIGN KEY(id_adherent) REFERENCES adherant(id_adherent)
 );
@@ -97,9 +100,11 @@ CREATE TABLE reservation(
 CREATE TABLE prolongement(
    id_prolongement INT,
    date_prolongement DATE,
+   id_pret INT NOT NULL,
    id_status INT NOT NULL,
    id_adherent INT NOT NULL,
    PRIMARY KEY(id_prolongement),
+   FOREIGN KEY(id_pret) REFERENCES pret(id_pret),
    FOREIGN KEY(id_status) REFERENCES status(id_status),
    FOREIGN KEY(id_adherent) REFERENCES adherant(id_adherent)
 );
@@ -120,6 +125,3 @@ CREATE TABLE categorie_livre(
    FOREIGN KEY(id_livre) REFERENCES livre(id_livre),
    FOREIGN KEY(id_categorie) REFERENCES categorie(id_categorie)
 );
-
-
-

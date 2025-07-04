@@ -28,15 +28,19 @@
                     <td>${pret.dateFin}</td>
                     <td>${pret.typePret.type}</td>
                     <td>
-                        <% 
-                            if ("1".equals(String.valueOf(pageContext.getAttribute("pret.rendu")))) {
-                                out.print("Le livre est rendu");
-                            } else if ("0".equals(String.valueOf(pageContext.getAttribute("pret.rendu")))) {
-                                out.print("En cours de lecture <a href=\"/prolonger?pretId=" + pageContext.getAttribute("pret.id") + "\">Prolonger</a>");
-                            } else {
-                                out.print("En cours de lecture");
-                            }
-                        %>
+                        <!-- Débogage temporaire -->
+                        <c:out value="Debug: rendu=${pret.rendu}, idPret=${pret.idPret}" />
+                        <c:choose>
+                            <c:when test="${pret.getRendu()==1}">
+                                Le livre est rendu
+                            </c:when>
+                            <c:when test="${pret.getRendu()==0}">
+                                En cours de lecture <a href="prolonger?pretId=${pret.getIdPret()}">Prolonger</a>
+                            </c:when>
+                            <c:otherwise>
+                                En cours de lecture
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                 </tr>
             </c:forEach>
