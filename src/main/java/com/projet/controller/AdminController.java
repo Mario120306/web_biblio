@@ -1,12 +1,16 @@
 package com.projet.controller;
 
 import com.projet.entity.Pret;
+import com.projet.entity.Reservation;
 import com.projet.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.projet.service.PretService;
+import com.projet.service.ReservationService;
+
+
 import java.util.List;
 
 @Controller
@@ -17,6 +21,9 @@ public class AdminController {
 
     @Autowired
     private PretService pretService;
+
+    @Autowired
+    private ReservationService ReservationService;
 
     @PostMapping("/login")
     public String login(@RequestParam("nom") String nom,
@@ -32,4 +39,12 @@ public class AdminController {
             return "index";
         }
     }
+    @GetMapping("/render_reservation")
+    public String hello(Model model){
+        model.addAttribute("test","varianle");
+        List<Reservation> Reservation = ReservationService.findAll();
+        model.addAttribute("reservations", Reservation);
+        return "Admin/Reservation_list";
+    }
+    
 }

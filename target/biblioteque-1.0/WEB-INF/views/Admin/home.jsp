@@ -175,7 +175,7 @@
         <a href="#home" class="logo">Bibliothèque</a>
         <ul class="nav-links">
             <li><a href="#home" class="active">Accueil</a></li>
-            <li><a href="render_gestion">Gestion Réservation</a></li>
+            <li><a href="render_reservation">Gestion Réservation</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -203,7 +203,6 @@
                         <td>${pret.dateFin}</td>
                         <td>
                             <!-- Débogage temporaire -->
-                            <c:out value="Debug: ${pret.getRendu()}" />
                             <c:choose>
                                 <c:when test="${pret.getRendu() == 1}">
                                     <span class="status-returned">Le livre est rendu</span>
@@ -225,7 +224,7 @@
                                     <button class="rendu-button" disabled>Le livre est rendu</button>
                                 </c:when>
                                 <c:when test="${pret.getRendu() == 0}">
-                                    <a href="/prolonger?pretId=${pret.getIdPret()}" class="rendu-button">Prolonger</a>
+                                    <a href="prolonger?pretId=${pret.getIdPret()}" class="rendu-button">Render</a>
                                 </c:when>
                                 <c:otherwise>
                                     <span>En cours de lecture</span>
