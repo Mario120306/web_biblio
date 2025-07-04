@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -199,15 +200,14 @@
             <tbody>
                 <c:forEach var="pret" items="${prets}">
                     <tr>
-                        <td>${pret.dateDebut}</td>
-                        <td>${pret.dateFin}</td>
+                        <td><fmt:formatDate value="${pret.dateDebut}" pattern="yyyy-MM-dd"/></td>
+                        <td><fmt:formatDate value="${pret.dateFin}" pattern="yyyy-MM-dd"/></td>
                         <td>
-                            <!-- Débogage temporaire -->
                             <c:choose>
-                                <c:when test="${pret.getRendu() == 1}">
+                                <c:when test="${pret.rendu == 1}">
                                     <span class="status-returned">Le livre est rendu</span>
                                 </c:when>
-                                <c:when test="${pret.getRendu() == 0}">
+                                <c:when test="${pret.rendu == 0}">
                                     <span class="status-pending">En cours de lecture</span>
                                 </c:when>
                                 <c:otherwise>
@@ -221,22 +221,29 @@
                         <td>
                             <c:choose>
                                 <c:when test="${pret.rendu == 1}">
-                                    <button class="btn btn-success" disabled>
-                                        <i class="fas fa-check-circle"></i> Livre rendu
+                                    <button class="rendu-button" disabled>
+                                        <i class="fas fa-check"></i> Livre rendu
                                     </button>
                                 </c:when>
                                 <c:when test="${pret.rendu == 0}">
-                                    <form action="rendre_livre" method="get" style="display: inline;">
+                                    <form action="${pageContext.request.contextPath}/rendre_livre" method="get" class="return-form">
                                         <input type="hidden" name="pretId" value="${pret.idPret}">
-                                        <input type="date" name="date_rendu">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-book"></i> Rendre le livre
+                                        <div class="date-picker-container">
+                                            <label for="date_rendu_${pret.idPret}">Date de retour :</label>
+                                            <c:set var="today" value="<%= new java.util.Date() %>"/>
+                                            <input type="date" id="date_rendu_${pret.idPret}" name="date_rendu" 
+                                                   value="<fmt:formatDate value='${today}' pattern='yyyy-MM-dd'/>"
+                                            >
+                                        </div>
+                                        <button type="submit" class="rendu-button">
+                                            <i class="fas fa-book"></i>rendre
                                         </button>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                     </form>
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="badge bg-warning text-dark">
-                                        <i class="fas fa-hourglass-half"></i> En cours de lecture
+                                    <span class="status-pending">
+                                        <i class="fas fa-hourglass-half"></i> En cours
                                     </span>
                                 </c:otherwise>
                             </c:choose>
@@ -260,7 +267,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Fermer le menu lorsqu'on clique ailleurs
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.navbar')) {
                 navLinks.classList.remove('active');

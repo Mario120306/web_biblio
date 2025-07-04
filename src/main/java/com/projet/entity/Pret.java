@@ -35,9 +35,9 @@ public class Pret {
     @Column(name = "rendu")
     private int rendu;
 
-    @Column(name = "date_rendu")
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date_rendu;
-
     
     public Pret(int idPret, Date dateDebut, Date dateFin, TypePret typePret, Adherant adherant, Exemplaire exemplaire,
             int rendu, Date date_rendu) {

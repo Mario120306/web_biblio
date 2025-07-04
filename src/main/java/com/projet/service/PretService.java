@@ -7,10 +7,12 @@ import com.projet.repository.PretRepository;
 import com.projet.repository.PenaliteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Date;
+
 
 @Service
 public class PretService {
@@ -28,7 +30,9 @@ public class PretService {
     public Pret save(Pret pret) {
         return pretRepository.save(pret);
     }
-
+    public Pret findPretById(int id){
+        return pretRepository.findByIdPret(id);
+    }
     public boolean insererPretSiQuota(Adherant adherant, Pret pret) {
         int quota = adherant.getProfil().getQuotaPret();
 
@@ -101,5 +105,11 @@ public Pret updatePret(int idPret,Date date_rendre , Pret updatedPret) {
 
         // Sauvegarder les modifications
         return pretRepository.save(existingPret);
+    }
+  
+
+    public static long calculerDifferenceJours(Date date1, Date date2) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 }

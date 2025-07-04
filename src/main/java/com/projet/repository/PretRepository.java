@@ -12,4 +12,5 @@ import java.util.List;
 public interface PretRepository extends JpaRepository<Pret, Integer> {
     List<Pret> findByAdherant_IdAdherent(int idAdherent);
     List<Pret> findByAdherant(Adherant adherant);
+    Pret findByIdPret(int idPret);
 }
