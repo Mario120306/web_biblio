@@ -203,7 +203,6 @@
                         <td>${pret.dateFin}</td>
                         <td>
                             <!-- Débogage temporaire -->
-                            <c:out value="Debug: ${pret.getRendu()}" />
                             <c:choose>
                                 <c:when test="${pret.getRendu() == 1}">
                                     <span class="status-returned">Le livre est rendu</span>
@@ -225,7 +224,7 @@
                                     <button class="rendu-button" disabled>Le livre est rendu</button>
                                 </c:when>
                                 <c:when test="${pret.getRendu() == 0}">
-                                    <a href="/prolonger?pretId=${pret.getIdPret()}" class="rendu-button">Prolonger</a>
+                                    <a href="rendre_livre?pretId=${pret.getIdPret()}" class="rendu-button">Rendre</a>
                                 </c:when>
                                 <c:otherwise>
                                     <span>En cours de lecture</span>

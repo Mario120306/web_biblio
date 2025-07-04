@@ -32,4 +32,25 @@ public class AdminController {
             return "index";
         }
     }
+
+    @GetMapping("/rendre_livre")
+    public String rendrePret(@RequestParam("pretId") int pretId, Model model) {
+        try {
+            // Créer un objet Pret vide pour la mise à jour (seul rendu sera modifié à 1)
+            Pret updatedPret = new Pret();
+            // Appeler la méthode updatePret pour mettre à jour le prêt
+            pretService.updatePret(pretId, updatedPret);
+            // Ajouter un message de confirmation
+            model.addAttribute("message", "Le prêt a été marqué comme rendu avec succès.");
+             List<Pret> listePrets = pretService.findAll();
+            model.addAttribute("prets", listePrets);
+            return "Admin/home"; // Rediriger vers la page de la liste des prêts
+        } catch (IllegalArgumentException e) {
+            // Gérer le cas où le prêt n'existe pas
+            model.addAttribute("erreur", "Erreur : " + e.getMessage());
+            List<Pret> listePrets = pretService.findAll();
+            model.addAttribute("prets", listePrets);
+            return "Admin/home"; // Retourner la page sans rediriger en cas d'erreur
+        }
+    }
 }

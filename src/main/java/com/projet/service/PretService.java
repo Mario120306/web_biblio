@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PretService {
@@ -22,7 +23,7 @@ public class PretService {
     public List<Pret> findAll() {
         return pretRepository.findAll();
     }
-
+    
     public Pret save(Pret pret) {
         return pretRepository.save(pret);
     }
@@ -67,5 +68,36 @@ public class PretService {
 
     public List<Pret> findByAdherant(Adherant adherant) {
         return pretRepository.findByAdherant(adherant);
+    }
+public Pret updatePret(int idPret, Pret updatedPret) {
+        // Récupérer le prêt existant par son ID
+        Optional<Pret> optionalPret = pretRepository.findById(idPret);
+        if (!optionalPret.isPresent()) {
+            throw new IllegalArgumentException("Prêt avec l'ID " + idPret + " non trouvé");
+        }
+
+        Pret existingPret = optionalPret.get();
+
+        // Mettre à jour les champs modifiables
+        if (updatedPret.getDateDebut() != null) {
+            existingPret.setDateDebut(updatedPret.getDateDebut());
+        }
+        if (updatedPret.getDateFin() != null) {
+            existingPret.setDateFin(updatedPret.getDateFin());
+        }
+        // Toujours définir rendu à 1
+        existingPret.setRendu(1);
+        if (updatedPret.getTypePret() != null) {
+            existingPret.setTypePret(updatedPret.getTypePret());
+        }
+        if (updatedPret.getAdherant() != null) {
+            existingPret.setAdherant(updatedPret.getAdherant());
+        }
+        if (updatedPret.getExemplaire() != null) {
+            existingPret.setExemplaire(updatedPret.getExemplaire());
+        }
+
+        // Sauvegarder les modifications
+        return pretRepository.save(existingPret);
     }
 }
