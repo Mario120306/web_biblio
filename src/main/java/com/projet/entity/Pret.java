@@ -89,7 +89,9 @@ public class Pret {
     public int isRendu() {
         return rendu;
     }
-
+    public int getRendu() {
+        return rendu;
+    }
     public void setRendu(int rendu) {
         this.rendu = rendu;
     }
