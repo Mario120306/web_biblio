@@ -8,6 +8,7 @@ com\projet\entity\Profil.class
 com\projet\repository\ReservationRepository.class
 com\projet\service\AuteurService.class
 com\projet\entity\Pret.class
+com\projet\entity\LivreDTO.class
 com\projet\repository\AdminRepository.class
 com\projet\controller\AdherantController.class
 com\projet\service\PenaliteService.class

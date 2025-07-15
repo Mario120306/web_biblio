@@ -197,7 +197,7 @@
             <li><a href="#home" class="active">Accueil</a></li>
             <li><a href="render_gestion">Gestion Reservation</a></li>
             <li><a href="render_prologement">Gestion des prologement</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="render_list_livre">List des livres</a></li>
         </ul>
         <button class="hamburger">☰</button>
     </nav>
