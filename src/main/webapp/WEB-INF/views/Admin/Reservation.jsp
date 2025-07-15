@@ -303,6 +303,7 @@
         <br>
         <a href="retour_admin" class="back-link">&#8592; Retour a l'accueil</a>
     </div>
+    
     <script>
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
