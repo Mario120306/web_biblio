@@ -5,9 +5,10 @@ import com.projet.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/*import java.io.ObjectInputFilter.Status;*/
 import java.util.List;
-import java.util.Optional;
-
+/*import java.util.Optional;*/
+/*import com.projet.entity.*;*/
 @Service
 public class ReservationService {
 
@@ -18,7 +19,7 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    public Optional<Reservation> findById(int id) {
+    public Reservation findById(int id) {
         return reservationRepository.findById(id);
     }
 
@@ -37,4 +38,26 @@ public class ReservationService {
     public List<Reservation> findByExemplaireId(int idExemplaire) {
         return reservationRepository.findByExemplaire_IdExemplaire(idExemplaire);
     }
+    /*public Reservation updateReservation(int id_reservation,Reservation updateReservation){
+
+        Reservation existingReservation=reservationRepository.findById(id_reservation);
+        Status status =new Status(2,"Confirme ");
+        if(updateReservation.getAdherant()!=null){
+            existingReservation.setAdherant(updateReservation.getAdherant());
+        }
+        if(updateReservation.getDateReservation()!=null){
+            existingReservation.setDateReservation(updateReservation.getDateReservation());
+        }
+        if(updateReservation.getDateDebutPret()!=null){
+            existingReservation.setDateDebutPret(updateReservation.getDateDebutPret());
+        }
+        if(updateReservation.getDateFinPret()!=null){
+            existingReservation.setDateFinPret(updateReservation.getDateFinPret());
+        }
+        if(updateReservation.getExemplaire()!=null){
+            existingReservation.setExemplaire(updateReservation.getExemplaire());
+        }
+        existingReservation.setStatus(status);
+        return reservationRepository.save(existingReservation);
+    }*/
 }

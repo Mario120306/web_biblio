@@ -13,60 +13,62 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #ffffff 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f4f4f9; /* Fond gris clair neutre */
             min-height: 100vh;
-            color: #2c3e50;
+            color: #333333; /* Couleur de texte sombre */
         }
 
         .sidebar {
             height: 100vh;
-            width: 280px;
+            width: 300px;
             position: fixed;
             top: 0;
             left: 0;
-            background: rgba(44, 62, 80, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 30px 0;
-            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+            background: #40c4ff; /* Bleu turquoise pour la sidebar */
+            padding: 40px 0;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .sidebar-header {
             padding: 0 30px 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 40px;
+            text-align: center;
         }
 
         .sidebar-header h2 {
-            color: #ecf0f1;
-            font-size: 24px;
-            font-weight: 300;
-            text-align: center;
+            color: #ffffff; /* Texte blanc pour contraste */
+            font-size: 26px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
         }
 
         .sidebar-header .user-info {
-            text-align: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .user-avatar {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #ffffff);
+            background: #0288d1; /* Bleu plus foncé pour l'avatar */
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 10px;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
+            margin: 0 auto 12px;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .user-name {
-            color: #bdc3c7;
-            font-size: 14px;
+            color: #e0f7fa; /* Cyan clair pour harmoniser avec le turquoise */
+            font-size: 15px;
+            font-weight: 400;
         }
 
         .sidebar-menu {
@@ -75,18 +77,21 @@
         }
 
         .sidebar-menu li {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .sidebar-menu a {
             display: flex;
             align-items: center;
-            color: #ecf0f1;
-            padding: 18px 30px;
+            color: #ffffff;
+            padding: 16px 30px;
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
+            font-size: 1.05rem;
+            font-weight: 400;
+            border-radius: 8px;
+            margin: 0 15px;
         }
 
         .sidebar-menu a::before {
@@ -96,8 +101,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.4s;
         }
 
         .sidebar-menu a:hover::before {
@@ -105,119 +110,146 @@
         }
 
         .sidebar-menu a:hover {
-            background: rgba(52, 73, 94, 0.8);
-            transform: translateX(5px);
-            border-left: 4px solid #667eea;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(8px);
+            border-left: 4px solid #0288d1; /* Bordure bleu foncé pour survol */
+            color: #ffffff;
         }
 
         .sidebar-menu a.active {
-            background: rgba(52, 73, 94, 0.8);
-            border-left: 4px solid #667eea;
+            background: rgba(255, 255, 255, 0.15);
+            border-left: 4px solid #0288d1; /* Bleu foncé pour l'élément actif */
         }
 
         .container {
-            margin-left: 320px;
+            margin-left: 340px;
             padding: 40px;
             max-width: 1200px;
         }
 
         h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 30px;
             text-align: center;
+            letter-spacing: -0.02em;
         }
 
         .loan-table {
             width: 100%;
             border-collapse: collapse;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .loan-table th,
         .loan-table td {
-            padding: 12px;
+            padding: 14px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
-            color: #2c3e50;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333333;
         }
 
         .loan-table th {
-            background-color: #2c3e50;
-            color: white;
+            background-color: #374151; /* Gris anthracite pour l'en-tête du tableau */
+            color: #ffffff;
+            font-weight: 600;
         }
 
         .loan-table tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #f8f9fa;
         }
 
         .loan-table tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f3f4f6; /* Gris clair pour survol */
         }
 
         .action-button {
-            background-color: #667eea;
-            color: white;
+            background-color: #40c4ff; /* Bouton turquoise */
+            color: #ffffff;
             border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+            padding: 10px 14px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
             text-decoration: none;
-            transition: background-color 0.3s;
-            margin-right: 5px;
+            transition: all 0.3s ease;
+            margin-right: 8px;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
         }
 
         .action-button:hover {
-            background-color: #5a6cd1;
+            background-color: #0288d1; /* Bleu plus foncé pour survol */
+            box-shadow: 0 4px 10px rgba(64, 196, 255, 0.3);
+        }
+
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.4s;
+        }
+
+        .action-button:hover::before {
+            left: 100%;
         }
 
         .action-button:disabled {
-            background-color: #6c757d;
+            background-color: #6b7280;
             cursor: not-allowed;
         }
 
         .status-returned {
-            color: #28a745;
-            font-weight: bold;
+            color: #2e7d32;
+            font-weight: 600;
         }
 
         .status-pending {
-            color: #ffc107;
-            font-weight: bold;
+            color: #0288d1; /* Bleu turquoise pour statut en cours */
+            font-weight: 600;
         }
 
         .message,
         .erreur {
             text-align: center;
-            margin-bottom: 20px;
-            padding: 10px;
-            border-radius: 5px;
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
         }
 
         .message {
-            background-color: #d4edda;
-            color: #155724;
+            background-color: #e6f3fa; /* Turquoise clair pour message de succès */
+            color: #01579b;
         }
 
         .erreur {
-            background-color: #f8d7da;
-            color: #721c24;
+            background-color: #fee2e2;
+            color: #991b1b;
         }
 
         .back-link {
             display: inline-block;
-            margin-top: 20px;
-            color: #667eea;
+            margin-top: 25px;
+            color: #40c4ff; /* Lien turquoise */
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
             transition: color 0.3s ease;
         }
 
         .back-link:hover {
-            color: #5a6cd1;
-            text-decoration: underline;
+            color: #0288d1; /* Bleu plus foncé pour survol */
         }
 
         @media (max-width: 768px) {
@@ -225,6 +257,7 @@
                 width: 100%;
                 height: auto;
                 position: relative;
+                padding: 20px 0;
             }
 
             .container {
@@ -233,7 +266,17 @@
             }
 
             .loan-table {
-                font-size: 14px;
+                font-size: 0.85rem;
+            }
+
+            .loan-table th,
+            .loan-table td {
+                padding: 10px;
+            }
+
+            .action-button {
+                padding: 8px 12px;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -245,12 +288,12 @@
             <div class="user-name">Adherent</div>
             <h2>Bibliotheque</h2>
         </div>
-        <ul class="sidebar-menu">
+         <ul class="sidebar-menu">
             <li><a href="#">Voir les livres</a></li>
-            <li><a href="liste_pret" class="active">Mes prets</a></li>
+            <li><a href="liste_penalite" class="active">Mes penalites</a></li>
             <li><a href="faire_reservation">Faire une reservation</a></li>
             <li><a href="#">Mon profil</a></li>
-            <li><a href="render_insertPret">Faire un pret</a></li>
+             <li><a href="render_insertPret">Faire un pret</a></li>
             <li><a href="#">Deconnexion</a></li>
         </ul>
     </div>
@@ -265,7 +308,7 @@
             <div class="erreur">${erreur}</div>
         </c:if>
         <c:if test="${empty prets}">
-            <p style="color: #2c3e50; text-align: center;">Aucun pret trouve.</p>
+            <p style="color: #333333; text-align: center;">Aucun pret trouve.</p>
         </c:if>
         <c:if test="${not empty prets}">
             <table class="loan-table">
@@ -283,13 +326,11 @@
                     <c:forEach var="pret" items="${prets}">
                         <tr>
                             <td>${pret.exemplaire.livre.titre}</td>
-                            <td>${pret.exemplaire.idExemplaire}</td>
+                            <td>${pret.exemplaire.livre.titre}</td>
                             <td>${pret.dateDebut}</td>
                             <td>${pret.dateFin}</td>
                             <td>${pret.typePret.type}</td>
                             <td>
-                                <!-- Debogage temporaire -->
-                                <c:out value="Debug: rendu=${pret.rendu}, idPret=${pret.idPret}" />
                                 <c:choose>
                                     <c:when test="${pret.rendu == 1}">
                                         <span class="status-returned">Le livre est rendu</span>
@@ -298,11 +339,12 @@
                                         <span class="status-pending">En cours de lecture</span>
                                         <form action="prolonger" method="post" style="display: inline;">
                                             <input type="hidden" name="pretId" value="${pret.idPret}">
+                                            <c:set var="today" value="<%= new java.util.Date() %>"/>
+                                            <input type="date" id="date_rendu_${pret.idPret}" name="dateProlongement" 
+                                                   value="<fmt:formatDate value='${today}' pattern='yyyy-MM-dd'/>"
+                                                   min="<fmt:formatDate value='${pret.dateFin}' pattern='yyyy-MM-dd'/>"
+                                            >
                                             <button type="submit" class="action-button">Prolonger</button>
-                                        </form>
-                                        <form action="rendre_livre" method="post" style="display: inline;">
-                                            <input type="hidden" name="pretId" value="${pret.idPret}">
-                                            <button type="submit" class="action-button">Rendre</button>
                                         </form>
                                     </c:when>
                                     <c:otherwise>
@@ -316,7 +358,7 @@
             </table>
         </c:if>
         <br>
-        <a href="/" class="back-link">Retour a l'accueil</a>
+        <a href="retour" class="back-link">Retour a l'accueil</a>
     </div>
 </body>
 </html>

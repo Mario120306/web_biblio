@@ -10,4 +10,5 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
     List<Reservation> findByAdherant_IdAdherent(int idAdherent);
     List<Reservation> findByExemplaire_IdExemplaire(int idExemplaire);
+    Reservation findById(int id_reservation);
 }

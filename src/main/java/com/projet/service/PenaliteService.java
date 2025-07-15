@@ -1,5 +1,6 @@
 package com.projet.service;
 
+import com.projet.entity.Adherant;
 import com.projet.entity.Penalite;
 import com.projet.repository.PenaliteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,8 @@ public class PenaliteService {
 
     public void deleteById(int id) {
         penaliteRepository.deleteById(id);
+    }
+    public List<Penalite> findByAdherant(Adherant adherant){
+        return penaliteRepository.findByAdherant(adherant);
     }
 }

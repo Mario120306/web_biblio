@@ -28,6 +28,7 @@ com\projet\repository\CategorieRepository.class
 com\projet\entity\Adherant.class
 com\projet\service\PretService.class
 com\projet\repository\ProfilRepository.class
+com\projet\repository\ProlongementRepository.class
 com\projet\repository\AdherantRepository.class
 com\projet\entity\Penalite.class
 com\projet\controller\AdminController.class
@@ -38,3 +39,4 @@ com\projet\entity\Reservation.class
 com\projet\repository\LivreRepository.class
 com\projet\service\CategorieService.class
 com\projet\service\LivreService.class
+com\projet\service\ProlongementService.class

@@ -13,4 +13,5 @@ public interface PenaliteRepository extends JpaRepository<Penalite, Integer> {
     List<Penalite> findByAdherantAndDebutPenaliteLessThanEqualAndFinPenaliteGreaterThanEqual(
         Adherant adherant, Date dateDebut, Date dateFin
     );
+    List<Penalite> findByAdherant(Adherant adherant);
 }

@@ -128,14 +128,3 @@ CREATE TABLE categorie_livre(
 
 
 
-if (pret.getDateFin() != null && date_rendu != null) {
-    if (pret.getDateFin().isBefore(date_rendu)) {
-        // Code à exécuter si dateFin est avant date_rendu (retard)
-        long joursRetard = ChronoUnit.DAYS.between(pret.getDateFin(), date_rendu);
-        penaliteService.appliquerPenalite(pret.getAdherant(), joursRetard);
-    }
-} else {
-    // Gérer le cas où une des dates est null
-    logger.error("Une des dates est null (dateFin: {}, dateRendu: {})", 
-                 pret.getDateFin(), date_rendu);
-}

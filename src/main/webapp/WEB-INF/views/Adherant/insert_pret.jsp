@@ -6,87 +6,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demande de pret</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f4f4f9; /* Fond gris clair neutre */
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
+            color: #333333; /* Couleur de texte sombre */
         }
+
         .container {
             width: 100%;
-            max-width: 400px;
-            margin: 16px;
+            max-width: 450px;
+            margin: 20px;
             background: #ffffff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            border-radius: 8px;
-            padding: 24px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            border-left: 4px solid #40c4ff; /* Bordure turquoise pour cohérence */
         }
+
         h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 24px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 30px;
             text-align: center;
+            letter-spacing: -0.02em;
         }
+
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 25px;
         }
+
         label {
             display: block;
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            color: #374151;
-            margin-bottom: 4px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
         }
+
         select, input[type="date"] {
             width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #d1d5db;
+            padding: 10px 14px;
+            border: 1px solid #e0e0e0;
             border-radius: 6px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            background-color: #f8f9fa;
             font-size: 1rem;
             outline: none;
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            transition: all 0.3s ease;
         }
+
         select:focus, input[type="date"]:focus {
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+            border-color: #40c4ff; /* Turquoise pour le focus */
+            box-shadow: 0 0 6px rgba(64, 196, 255, 0.3);
+            background-color: #ffffff;
         }
+
         button {
             width: 100%;
-            background-color: #4f46e5;
+            background: #40c4ff; /* Bouton turquoise */
             color: #ffffff;
-            padding: 10px 16px;
+            padding: 12px 16px;
             border: none;
             border-radius: 6px;
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.15s ease-in-out;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
+
         button:hover {
-            background-color: #4338ca;
+            background: #0288d1; /* Bleu plus foncé pour le survol */
+            box-shadow: 0 4px 10px rgba(64, 196, 255, 0.3);
         }
-        button:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5);
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.4s;
         }
+
+        button:hover::before {
+            left: 100%;
+        }
+
         .message {
-            margin-top: 16px;
-            padding: 16px;
+            margin-top: 20px;
+            padding: 15px;
             border-radius: 6px;
             text-align: center;
             font-size: 0.875rem;
         }
+
         .success {
-            background-color: #d1fae5;
-            color: #065f46;
+            background-color: #e6f3fa; /* Fond turquoise clair pour succès */
+            color: #01579b;
         }
+
         .error {
             background-color: #fee2e2;
             color: #991b1b;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #40c4ff; /* Lien turquoise */
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #0288d1; /* Bleu plus foncé pour survol */
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 15px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            select, input[type="date"], button {
+                font-size: 0.95rem;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -137,6 +204,8 @@
         <c:if test="${not empty erreur}">
             <div class="message error">${erreur}</div>
         </c:if>
+
+        <a href="retour" class="back-link">Retour a l'accueil</a>
     </div>
 </body>
 </html>

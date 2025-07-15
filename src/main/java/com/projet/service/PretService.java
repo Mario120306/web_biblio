@@ -3,8 +3,10 @@ package com.projet.service;
 import com.projet.entity.Pret;
 import com.projet.entity.Adherant;
 import com.projet.entity.Penalite;
+
 import com.projet.repository.PretRepository;
 import com.projet.repository.PenaliteRepository;
+import com.projet.repository.ExemplaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Date;
@@ -22,6 +24,9 @@ public class PretService {
 
     @Autowired
     private PenaliteRepository penaliteRepository;
+
+    @Autowired
+    private ExemplaireRepository exemplaireRepository;
 
     public List<Pret> findAll() {
         return pretRepository.findAll();
@@ -43,7 +48,7 @@ public class PretService {
 
         // Nombre de prêts actifs à la date de début du nouveau prêt (non rendus)
         long nbPretsActifs = pretRepository.findByAdherant(adherant).stream()
-            .filter(p -> p.isRendu() == 0 && (p.getDateFin() == null || !p.getDateFin().before(pret.getDateDebut())))
+            .filter(p -> p.getRendu() == 0 && (p.getDateFin() == null || !p.getDateFin().before(pret.getDateDebut())))
             .count();
 
         // Nombre de prêts déjà faits le même jour
@@ -61,6 +66,9 @@ public class PretService {
         if (!estPenalise && nbPretsActifs < quota && nbPretsMemeJour < quota) {
             // Décrémenter le nombre d'exemplaires disponibles
             pret.getExemplaire().setDisponible(pret.getExemplaire().getDisponible() - 1);
+            // Sauvegarder l'exemplaire modifié
+            exemplaireRepository.save(pret.getExemplaire());
+            // Sauvegarder le prêt
             pretRepository.save(pret);
             return true;
         }

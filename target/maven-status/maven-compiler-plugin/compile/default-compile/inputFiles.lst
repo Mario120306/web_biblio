@@ -23,6 +23,7 @@ C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\re
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\PenaliteRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\PretRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\ProfilRepository.java
+C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\ProlongementRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\ReservationRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\StatusRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\TypePretRepository.java
@@ -35,6 +36,7 @@ C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\se
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\PenaliteService.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\PretService.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\ProfilService.java
+C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\ProlongementService.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\ReservationService.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\StatusService.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\TypePretService.java
