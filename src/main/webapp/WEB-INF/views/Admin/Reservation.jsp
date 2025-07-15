@@ -294,7 +294,7 @@
                                     </c:otherwise>
                                 </c:choose>
                             </td>
-                            <td>${reservation.adherant.nom}</td>
+                            <td>${reservation.adherant.nom} ${reservation.adherant.prenom}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -281,7 +281,7 @@
             </tbody>
         </table>
     </div>  
-     <a href="retour_admin" class="back-link">&#8592; Retour à l'accueil</a>
+     <a href="retour_admin" class="back-link">&#8592; Retour a l'accueil</a>
     <script>
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');

@@ -370,7 +370,7 @@
             </table>
         </c:if>
         <br>
-        <a href="retour" class="back-link">Retour à l'accueil</a>
+        <a href="retour" class="back-link">Retour a l'accueil</a>
     </div>
 </body>
 </html>

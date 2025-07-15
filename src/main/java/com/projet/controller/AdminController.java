@@ -1,5 +1,6 @@
 package com.projet.controller;
 
+import com.projet.entity.Adherant;
 /*import com.fasterxml.jackson.annotation.JsonCreator.Mode;*/
 /*import com.oracle.wls.shaded.org.apache.xpath.operations.Mod;*/
 import com.projet.entity.Penalite;
@@ -10,6 +11,7 @@ import com.projet.entity.Reservation;
 import com.projet.entity.TypePret;
 import com.projet.service.AdminService;
 import com.projet.service.PenaliteService;
+import com.projet.service.AdherantService;
 import com.projet.service.ProlongementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,6 +45,9 @@ public class AdminController {
 
     @Autowired
     private ProlongementService prolongementService;
+
+    @Autowired
+    private AdherantService adherantService;
 
     @PostMapping("/login")
     public String login(@RequestParam("nom") String nom,
@@ -118,24 +123,56 @@ public class AdminController {
     }
     @GetMapping("/accepter_reservation")
     public String accepter_reservation(
-         @RequestParam("id_reservation") int id_reservation,
-         Model model
-    ){
-        Reservation reservation = reservationService.findById(id_reservation);
-        Status status =new Status(2,"Confirmée");
-        reservation.setStatus(status);
-        reservationService.save(reservation);
-        Pret pret = new Pret();
-        pret.setAdherant(reservation.getAdherant());
-        pret.setExemplaire(reservation.getExemplaire());
-        pret.setDateDebut(reservation.getDateDebutPret());
-        pret.setDateFin(reservation.getDateFinPret());
-        pret.setRendu(0);
-        TypePret typePret = new TypePret(2,"Long terme");
-        pret.setTypePret(typePret);
-        pretService.save(pret);
-        List<Reservation> reservations = reservationService.findAll();
-        model.addAttribute("reservations", reservations);
+        @RequestParam("id_reservation") int id_reservation,
+        Model model
+    ) {
+        try {
+          
+            Reservation reservation = reservationService.findById(id_reservation);
+            if (reservation == null) {
+                throw new RuntimeException("Réservation introuvable avec l'ID: " + id_reservation);
+            }
+
+         
+            Adherant adherant = adherantService.findById(reservation.getAdherant().getIdAdherent())
+                .orElseThrow(() -> new RuntimeException("Adhérent introuvable pour cette réservation"));
+
+            Status status = new Status(2, "Confirmée");
+            reservation.setStatus(status);
+            reservationService.save(reservation);
+
+            
+            Pret pret = new Pret();
+            pret.setAdherant(reservation.getAdherant());
+            pret.setExemplaire(reservation.getExemplaire());
+            pret.setDateDebut(reservation.getDateDebutPret());
+            pret.setDateFin(reservation.getDateFinPret());
+            pret.setRendu(0);
+            TypePret typePret = new TypePret(2, "Long terme");
+            pret.setTypePret(typePret);
+
+     
+            boolean pretCree = pretService.insererPretSiQuota(adherant, pret);
+            if (!pretCree) {
+                throw new RuntimeException("Le quota de prêt a été dépassé pour l'adhérent");
+            }
+
+           
+            List<Reservation> reservations = reservationService.findAll();
+            model.addAttribute("reservations", reservations);
+            
+        } catch (Exception e) {
+            // En cas d'erreur, ajouter un message d'erreur au modèle
+            model.addAttribute("erreur", "Erreur lors de l'acceptation de la réservation: " + e.getMessage());
+            
+            // Vous pourriez aussi logger l'erreur ici
+            // logger.error("Erreur dans accepter_reservation", e);
+            
+            // Récupérer quand même les réservations pour affichage
+            List<Reservation> reservations = reservationService.findAll();
+            model.addAttribute("reservations", reservations);
+        }
+
         return "Admin/Reservation";
     }
     @GetMapping("/render_prologement")
