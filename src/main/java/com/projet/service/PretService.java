@@ -3,6 +3,8 @@ package com.projet.service;
 import com.projet.entity.Pret;
 import com.projet.entity.Adherant;
 import com.projet.entity.Penalite;
+import com.projet.service.AbonnementService;
+import com.projet.entity.Abonnement;
 
 import com.projet.repository.PretRepository;
 import com.projet.repository.PenaliteRepository;
@@ -28,6 +30,9 @@ public class PretService {
     @Autowired
     private ExemplaireRepository exemplaireRepository;
 
+    @Autowired
+    private AbonnementService abonnementService;
+
     public List<Pret> findAll() {
         return pretRepository.findAll();
     }
@@ -43,6 +48,16 @@ public class PretService {
 
         // Vérifier la disponibilité de l'exemplaire
         if (pret.getExemplaire() == null || pret.getExemplaire().getDisponible() <= 0) {
+            return false;
+        }
+
+        // Vérifier que l'adhérant est abonné à la date de fin du prêt
+        boolean estAbonne = abonnementService.getAllAbonnements().stream()
+            .anyMatch(ab -> ab.getIdAdherent() == adherant.getIdAdherent()
+                && ab.getDateDebut() != null && ab.getDateFin() != null
+                && !pret.getDateFin().before(ab.getDateDebut())
+                && !pret.getDateFin().after(ab.getDateFin()));
+        if (!estAbonne) {
             return false;
         }
 
@@ -62,7 +77,7 @@ public class PretService {
         );
         boolean estPenalise = !penalites.isEmpty();
 
-        // Condition : pas de pénalité, quota non atteint pour le jour ET pour les prêts actifs, exemplaire dispo
+        // Condition : pas de pénalité, quota non atteint pour le jour ET pour les prêts actifs, exemplaire dispo, abonné
         if (!estPenalise && nbPretsActifs < quota && nbPretsMemeJour < quota) {
             // Décrémenter le nombre d'exemplaires disponibles
             pret.getExemplaire().setDisponible(pret.getExemplaire().getDisponible() - 1);
@@ -119,5 +134,13 @@ public Pret updatePret(int idPret,Date date_rendre , Pret updatedPret) {
     public static long calculerDifferenceJours(Date date1, Date date2) {
         long diffInMillies = date2.getTime() - date1.getTime();
         return TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    }
+
+    public int getQuotaRestant(Adherant adherant) {
+        int quota = adherant.getProfil().getQuotaPret();
+        long nbPretsActifs = pretRepository.findByAdherant(adherant).stream()
+            .filter(p -> p.getRendu() == 0)
+            .count();
+        return quota - (int) nbPretsActifs;
     }
 }

@@ -12,6 +12,7 @@ import com.projet.service.AdminService;
 import com.projet.service.PenaliteService;
 import com.projet.service.AdherantService;
 import com.projet.service.ProlongementService;
+import com.projet.service.AbonnementService;
 import com.projet.service.LivreService;
 import com.projet.service.PretService;
 import com.projet.service.ReservationService;
@@ -23,12 +24,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;     
 import java.util.concurrent.TimeUnit;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.projet.entity.LivreDTO;
 import java.util.stream.Collectors;
 import com.projet.entity.Categorie;
+import com.projet.entity.Abonnement;
+import java.util.HashMap;
 
 
 @Controller
@@ -54,6 +58,9 @@ public class AdminController {
 
     @Autowired
     private LivreService livreService;
+
+    @Autowired
+    private AbonnementService abonnementService;
 
     @PostMapping("/login")
     public String login(@RequestParam("nom") String nom,
@@ -230,6 +237,67 @@ public class AdminController {
                 .body("Erreur serveur: " + e.getMessage());
         }
     }
+    @GetMapping("/faire_abonnement")
+    public String faireAbonnement(Model model) {
+        List<Adherant> adherants = adherantService.findAll();
+        model.addAttribute("adherants", adherants);
+        return "Admin/Abonnement";
+    }
+    @PostMapping("/creer_abonnement")
+    public String creerAbonnement(
+            @RequestParam("dateDebut") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateDebut,
+            @RequestParam("dateFin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFin,
+            @RequestParam("idAdherent") Integer idAdherent,
+            Model model) {
+        
+        try {
+            Abonnement abonnement = new Abonnement(dateDebut, dateFin, idAdherent);
+            abonnementService.createAbonnement(abonnement);
+            model.addAttribute("message", "Abonnement créé avec succès.");
+            
+            // Conserver les valeurs sélectionnées après soumission
+            model.addAttribute("dateDebut", new SimpleDateFormat("yyyy-MM-dd").format(dateDebut));
+            model.addAttribute("dateFin", new SimpleDateFormat("yyyy-MM-dd").format(dateFin));
+            model.addAttribute("idAdherent", idAdherent);
+            
+        } catch (Exception e) {
+            model.addAttribute("erreur", "Erreur lors de la création de l'abonnement: " + e.getMessage());
+            
+            // Conserver les valeurs en cas d'erreur
+            model.addAttribute("dateDebut", new SimpleDateFormat("yyyy-MM-dd").format(dateDebut));
+            model.addAttribute("dateFin", new SimpleDateFormat("yyyy-MM-dd").format(dateFin));
+            model.addAttribute("idAdherent", idAdherent);
+        }
+        
+        // Recharger la liste des adhérents
+        List<Adherant> adherants = adherantService.findAll();
+        model.addAttribute("adherants", adherants);
+        
+        return "Admin/Abonnement";
+    }
+    @GetMapping("/list_adherant")
+    public String listAdherant(Model model) {
+        List<Adherant> adherants = adherantService.findAll();
+        model.addAttribute("adherants", adherants);
+        return "Admin/list_adherant";
+    }
 
-
+    @GetMapping("/details_adherant")
+    @ResponseBody
+    @CrossOrigin(origins = "http://localhost:8080")
+    public ResponseEntity<?> getDetailAdherantApi(@RequestParam("id") int adherantId) {
+        Adherant adherant = adherantService.findById(adherantId).orElse(null);
+        if (adherant == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Adhérant non trouvé");
+        }
+        java.util.Date today = new java.util.Date();
+        int quotaRestant = pretService.getQuotaRestant(adherant);
+        boolean abonne = abonnementService.estAbonne(adherant.getIdAdherent(), today);
+        boolean penalise = penaliteService.estPenalise(adherant, today);
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("quotaRestant", quotaRestant);
+        result.put("estAbonne", abonne);
+        result.put("estPenalise", penalise);
+        return ResponseEntity.ok(result);
+    }
 }

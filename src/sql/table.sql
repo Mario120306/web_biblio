@@ -125,6 +125,15 @@ CREATE TABLE categorie_livre(
    FOREIGN KEY(id_livre) REFERENCES livre(id_livre),
    FOREIGN KEY(id_categorie) REFERENCES categorie(id_categorie)
 );
+CREATE TABLE abonnement(
+   id INT,
+   date_debut DATE,
+   date_fin DATE,
+   id_adherent INT NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_adherent) REFERENCES adherant(id_adherent)
+);
+
 
 
 

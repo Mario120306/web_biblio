@@ -143,7 +143,7 @@ public class AdherantController {
             if (success) {
                 model.addAttribute("message", "Le prêt a été inséré avec succès !");
             } else {
-                model.addAttribute("erreur", "Impossible d'insérer le prêt : quota atteint, pénalité ou exemplaire indisponible.");
+                model.addAttribute("erreur", "Impossible d'insérer le prêt : quota atteint, pénalité ou exemplaire indisponible ou abonnement expiré.");
             }
         } catch (Exception e) {
             model.addAttribute("erreur", "Erreur lors de l'insertion du prêt : " + e.getMessage());

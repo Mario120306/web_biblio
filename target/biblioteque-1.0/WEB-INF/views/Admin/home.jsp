@@ -194,10 +194,11 @@
     <nav class="navbar">
         <a href="#home" class="logo">Bibliothèque</a>
         <ul class="nav-links">
-            <li><a href="#home" class="active">Accueil</a></li>
+            <li><a href="faire_abonnement" class="active">Faire un abonnement </a></li>
             <li><a href="render_gestion">Gestion Reservation</a></li>
             <li><a href="render_prologement">Gestion des prologement</a></li>
             <li><a href="render_list_livre">List des livres</a></li>
+            <li><a href="list_adherant">List des Adherants</a></li>
         </ul>
         <button class="hamburger">☰</button>
     </nav>
