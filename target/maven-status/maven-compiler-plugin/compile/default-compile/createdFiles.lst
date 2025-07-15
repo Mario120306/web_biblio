@@ -1,4 +1,5 @@
 com\projet\repository\PenaliteRepository.class
+com\projet\entity\Abonnement.class
 com\projet\entity\Admin.class
 com\projet\entity\Status.class
 com\projet\entity\Livre.class
@@ -10,11 +11,13 @@ com\projet\service\AuteurService.class
 com\projet\entity\Pret.class
 com\projet\entity\LivreDTO.class
 com\projet\repository\AdminRepository.class
+com\projet\service\AbonnementService.class
 com\projet\controller\AdherantController.class
 com\projet\service\PenaliteService.class
 com\projet\service\StatusService.class
 com\projet\service\ExemplaireService.class
 com\projet\service\TypePretService.class
+com\projet\repository\AbonnementRepository.class
 com\projet\entity\Exemplaire.class
 com\projet\entity\Prolongement.class
 com\projet\repository\ExemplaireRepository.class

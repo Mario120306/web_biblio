@@ -1,6 +1,7 @@
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\controller\AdherantController.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\controller\AdminController.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\controller\TestController.java
+C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\entity\Abonnement.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\entity\Adherant.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\entity\Admin.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\entity\Auteur.java
@@ -15,6 +16,7 @@ C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\en
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\entity\Reservation.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\entity\Status.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\entity\TypePret.java
+C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\AbonnementRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\AdherantRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\AdminRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\AuteurRepository.java
@@ -28,6 +30,7 @@ C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\re
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\ReservationRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\StatusRepository.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\repository\TypePretRepository.java
+C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\AbonnementService.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\AdherantService.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\AdminService.java
 C:\Users\Mario\Documents\S4\WEB DYNAMIQUE\web_biblio\src\main\java\com\projet\service\AuteurService.java

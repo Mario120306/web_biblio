@@ -6,6 +6,7 @@ import com.projet.repository.PenaliteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,5 +33,12 @@ public class PenaliteService {
     }
     public List<Penalite> findByAdherant(Adherant adherant){
         return penaliteRepository.findByAdherant(adherant);
+    }
+
+    public boolean estPenalise(Adherant adherant, Date date) {
+        // Cherche une pénalité couvrant la date
+        return !penaliteRepository.findByAdherantAndDebutPenaliteLessThanEqualAndFinPenaliteGreaterThanEqual(
+            adherant, date, date
+        ).isEmpty();
     }
 }
